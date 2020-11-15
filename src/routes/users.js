@@ -15,8 +15,8 @@ router.get('/users/signin',(req, res) => {
     res.render('users/signin');
 });
 
-router.post('/users/signin', passport.authenticate('local', {
-    //successRedirect: '/',
+router.post('/users/signin', passport.authenticate('local', {  
+    successRedirect: '/panel',
     failureRedirect: '/users/signin',
     failureFlash: true
 }));
@@ -79,8 +79,12 @@ router.post('/users/signup', async (req, res) =>{
    
 });
 
-//mostrar
-router.get('/panelUsu', isAuthenticated,async (req, res) => {
+//mostrar nombre y foto del usuario(pero el retorno de datos no es necesario)
+router.get('/panel', isAuthenticated,async (req, res) => {
+    res.render('panelUsuario/panelG'); 
+});
+
+ router.get('/panelUsu', isAuthenticated,async (req, res) => {
     console.log(req.name);
     await User.find({user: req.body._id})
     
@@ -98,7 +102,6 @@ router.get('/panelUsu', isAuthenticated,async (req, res) => {
         res.render('panelUsuario/elegirCurso', {User: contexto.User}); 
       });
   });
-  
 
 //cerrar sesion
 router.get('/users/logout' , (req, res) => {

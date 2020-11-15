@@ -12,7 +12,15 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 const fs = require('fs-extra');
-
+/*router.get('/users/signup/:id',isAuthenticated, async (req, res) => {
+    const user= await User.findById(req.params.id)
+    .then(data =>{
+        return {
+            name: data.name
+        }
+    })
+    res.render('notes/edit-note',{user});
+  });*/
 router.get('/moduloU', isAuthenticated, async (req, res) => {
     await User.find({user: req.body._id})
     
