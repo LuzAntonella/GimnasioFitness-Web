@@ -84,7 +84,7 @@ router.get('/panel', isAuthenticated,async (req, res) => {
     res.render('panelUsuario/panelG'); 
 });
 
- router.get('/panelUsu', isAuthenticated,async (req, res) => {
+/*router.get('/panelUsu', isAuthenticated,async (req, res) => {
     console.log(req.name);
     await User.find({user: req.body._id})
     
@@ -101,7 +101,7 @@ router.get('/panel', isAuthenticated,async (req, res) => {
         }
         res.render('panelUsuario/elegirCurso', {User: contexto.User}); 
       });
-  });
+  });*/
 
 //cerrar sesion
 router.get('/users/logout' , (req, res) => {

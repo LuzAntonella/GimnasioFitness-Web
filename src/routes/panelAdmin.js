@@ -35,7 +35,6 @@ router.get('/moduloU', isAuthenticated, async (req, res) => {
                 email: documento.email,
                 image: documento.imageURL,
                 id: documento._id,
-                
             }
           })
         }
