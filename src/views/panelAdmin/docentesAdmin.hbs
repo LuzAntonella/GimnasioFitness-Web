@@ -32,8 +32,10 @@
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">
 
-                            <!--<img src="assets/img/antonella.jpeg" class="img-fluid rounded-circle avatar mr-2">
-                            Luz Antonella -->
+                            {{#each user}}
+                            <img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+                            {{ name }}
+                            {{/each}}
 
                         </li>
                     </ul>
