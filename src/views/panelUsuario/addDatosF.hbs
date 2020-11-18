@@ -41,95 +41,67 @@
             </div>
         </nav>
         <!-- MI PERFIL DATOS-->
-        <div class="container p-3">
-            <h3 class="font-weight-bold mb-0">Datos Físicos</h3>
-            <div class="col-md-4 mx-auto">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Ficha Física</h3>
-                    </div>
-                    <div class="card-body">
-                        <form action="/addFicha" method="POST">
-                            <div class="form-group">
-                                <input type="text" name="documentoI" maxlength="8" size="15" class="form-control"
-                                    placeholder="Documento de identidad" autofocus>
+        <div class="container">
+            <h3 class=" font-weight-bold mb-0 p-3"></h3>
+            <div class="card mx-auto" style="width: 40rem;">
+                <div class="card-header">
+                    <h3>Ficha Física</h3>
+                </div>
+                <div class="card-body">
+                    <form action="/addFicha" method="POST">
+                        <div class="form-group">
+                            Deporte:
+                            <label for="deporteF"></label>
+                            <select name="deporteF" id="deporteF" class="form-control">
+                                <option>Futbol</option>
+                                <option>Básquet</option>
+                                <option>Voley</option>
+                                <option>Natación</option>
+                                <option>Tenis</option>
+                                <option>Ninguno</option>
+                            </select>
+                        </div>
 
-                            </div>
-                            <div class="form-group" autofocus>
-                                <p>
-                                    Género: <input type="radio" name="genero" id="genero" value="Femenino">Femenino
-                                    <input type="radio" name="genero" id="genero" value="Masculino">Masculino
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                <p>Fecha de Nacimiento: <input type="date" class="form-control" name="fechaNacimiento"
-                                        id="fechaNacimiento"></p>
-                            </div>
+                        <div class="form-group">
+                            Tipo Alimentación:
+                            <label for="alimentacionF"></label>
+                            <select name="alimentacionF" id="alimentacionF" class="form-control">
+                                <option>Balanceada</option>
+                                <option>Comida Chatarra</option>
+                                <option>No balanceada</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
 
-                            <div class="form-group">
-                                <p>
-                                    Estado Civil: <input type="radio" id="civil" name="civil" value="soltero">Soltero
-                                    <input type="radio" name="civil" id="civil" value="casado">Casado
-                                    <input type="radio" name="civil" id="civil" value="otro">Otro
-                                </p>
-                            </div>
-                            <div class="form-group">
-                                País:
-                                <label for="pais"></label>
-                                <select name="pais" id="pais" class="form-control">
-                                    <option>España</option>
-                                    <option>México</option>
-                                    <option>Colombia</option>
-                                    <option>Perú</option>
-                                    <option>Chile</option>
-                                    <option>Argentina</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Tipo de sangre</label>
-                                <select name="tipoSangre" class="form-control">
-                                    <option>O-</option>
-                                    <option>O+</option>
-                                    <option>A-</option>
-                                    <option>A+</option>
-                                    <option>B-</option>
-                                    <option>B+</option>
-                                    <option>AB-</option>
-                                    <option>AB+</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="seguroM" class="form-control" placeholder="SEGURO MÉDICO">
+                            <input type="number" class="form-control" name="horasSueñoF" placeholder="Horas de sueño">
+                        </div>
+                        <div class="form-group">
+                            <p>Fecha de Examen Físico: <input type="date" class="form-control" name="fechaExaF"
+                                    id="fechaExaF">
+                            </p>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="pesoF" placeholder="Peso(kg)">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class=" form-control" name="tallaF" placeholder="Talla(cm)">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="grasaCorporalF"
+                                placeholder="Grasa Corporal(kg)">
+                        </div>
 
-                            </div>
+                        <div class="form-group">
+                            <input type="number" class="form-control" name="masaMagraF" placeholder="Masa Magra(kg)">
+                        </div>
 
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Enfermedad Previa</label>
-                                <select name="enfermedadPrevia" class="form-control">
-                                    <option>Diabetes</option>
-                                    <option>Presión Alta</option>
-                                    <option>Enfermedad Cardiaca</option>
-                                    <option>Asma</option>
-                                    <option>Sin enfermedad</option>
-                                    <option>Otro</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleFormControlSelect1">Alergias</label>
-                                <select name="alergias" class="form-control">
-                                    <option>Si</option>
-                                    <option>No</option>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block" type="submit">
+                                Save
+                            </button>
+                        </div>
 
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <button class="btn btn-primary btn-block" type="submit">
-                                    Save
-                                </button>
-                            </div>
-
-                        </form>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

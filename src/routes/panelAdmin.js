@@ -54,6 +54,7 @@ router.get('/usuariosAdmin', isAuthenticated, async (req, res) => {
                 telefono: documento.telefono,
                 email: documento.email,
                 image: documento.imageURL,
+                role: documento.role,
                 id: documento._id,
                 
             }
@@ -131,7 +132,8 @@ router.post('/docentesAdmin', async (req, res) =>{
    
 });
 
-/*router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
+/*mostrar docente
+router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
  
       await Docente.find({Docente: req.body.docenteCurso})
     
@@ -140,6 +142,7 @@ router.post('/docentesAdmin', async (req, res) =>{
             Docente: documentos.map(documento => {
             return {
                 name: documento.name,
+                apellido: documento.apellido,
                 image: documento.imageURL,
                 id: documento._id,
             }
@@ -160,8 +163,10 @@ router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
             nameCurso: documento.nameCurso,
             docenteCurso: documento.docenteCurso,
             costoCurso: documento.costoCurso,
+            horaInicio: documento.horaInicio,
+            horaFin: documento.horaFin,
             descripcionCurso: documento.descripcionCurso,
-
+            id: documento._id,
         }
         })
     }
@@ -170,7 +175,7 @@ router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
 });
 //recibir datos de registro Cursos
 router.post('/cursosAdmin', async (req, res) =>{
-    const {codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso} = req.body;
+    const {codigoCurso,nameCurso,docenteCurso,costoCurso,horaInicio,horaFin,descripcionCurso} = req.body;
     const errors = [];
     
     if(!codigoCurso){
@@ -183,13 +188,15 @@ router.post('/cursosAdmin', async (req, res) =>{
         errors.push({text: 'Por favor elija un docente para el curso'});
     }
     if (errors.length > 0){
-        res.render('panelAdmin/cursosAdmin', {errors,codigoCurso,nameCurso,docenteCurso,costoCurso,descripcionCurso});
+        res.render('panelAdmin/cursosAdmin', {errors,codigoCurso,nameCurso,docenteCurso,costoCurso,horaInicio,horaFin,descripcionCurso});
     }else{
         const newCurso = new Curso({
             codigoCurso,
             nameCurso,
             docenteCurso,
             costoCurso,
+            horaInicio,
+            horaFin,
             descripcionCurso,
         });
         await newCurso.save();
@@ -199,4 +206,29 @@ router.post('/cursosAdmin', async (req, res) =>{
    
 });
 
+//mostrar perfil
+router.get('/perfilU', isAuthenticated, async (req, res) => {
+    res.render('panelAdmin/perfilA'); 
+});
+
+//eliminar un curso
+router.delete('/curso/delete/:id',isAuthenticated, async (req,res) => {
+    await Curso.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Persona Deleted Successfully');
+    res.redirect('/cursosAdmin');
+});
+
+//eliminar un docente
+router.delete('/docente/delete/:id',isAuthenticated, async (req,res) => {
+    await Docente.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Persona Deleted Successfully');
+    res.redirect('/docentesAdmin');
+});
+
+//eliminar un usuario
+router.delete('/usuario/delete/:id',isAuthenticated, async (req,res) => {
+    await User.findByIdAndDelete(req.params.id);
+    req.flash('success_msg','Persona Deleted Successfully');
+    res.redirect('/usuariosAdmin');
+});
 module.exports = router;

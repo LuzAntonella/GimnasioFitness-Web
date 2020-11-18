@@ -42,35 +42,68 @@
         </nav>
         <!-- MIS DATOS FÍSICOS-->
         <div class="container p-3">
-            <h3 class="font-weight-bold mb-0">DATOS FÍSICOS</h3>
+            <h3 class="font-weight-bold mb-0"></h3>
             <div class="row">
                 {{#each formM}}
-                <div class="card mx-auto">
+                <div class="card mx-auto" style="width: 40rem;">
                     <div class="card-body mt-4">
                         <h4 class="card-title" d-flex justify-content-between align-items-center>
-                            Ficha Médica <a href="/citas/edit/{{ id }}"><i class="fas fa-edit"></i></a>
+                            Ficha Física <a href="/fichaM/edit/{{ id }}"><i class="fas fa-edit"></i></a>
                         </h4>
-                        </p>Documento de Identidad<div class="form-group">
-                            <input type="text" name="documentoI" class="form-control" autofocus value="{{ documentoI}}"
-                                disabled>
+                        <div class="form-group">
+                            Deporte:
+                            <label for="deporteF"></label>
+                            <select name="deporteF" id="deporteF" class="form-control" disabled>
+                                <option>{{deporteF}}</option>
+                                <option>Futbol</option>
+                                <option>Básquet</option>
+                                <option>Voley</option>
+                                <option>Natación</option>
+                                <option>Tenis</option>
+                                <option>Ninguno</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            Tipo Alimentación:
+                            <label for="alimentacionF"></label>
+                            <select name="alimentacionF" id="alimentacionF" class="form-control" disabled>
+                                <option>{{alimentacionF}}</option>
+                                <option>Balanceada</option>
+                                <option>Comida Chatarra</option>
+                                <option>No balanceada</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+
+                            <p>Cantidad de Horas de Sueño<input type="number" class="col-sm-4 form-control"
+                                    name="horasSueñoF" placeholder="Horas de sueño" disabled value="{{horasSueñoF}}">
                             </p>
-
                         </div>
                         <div class="form-group">
-                            </p>Género: <input type="text" name="documentoI" class="form-control" autofocus
-                                value="{{ genero }}" disabled></p>
-
+                            <p>Fecha de Examen Físico: <input type="date" class="col-sm-4 form-control" name="fechaExaF"
+                                    id="fechaExaF" disabled value="{{fechaExaF}}">
+                            </p>
                         </div>
                         <div class="form-group">
-                            </p>País: <input type="text" name="documentoI" class="form-control" autofocus
-                                value="{{ pais }}" disabled></p>
-
+                            <p>Peso(kg)<input type="number" class="col-sm-4 form-control" name="pesoF"
+                                    placeholder="Peso(kg)" disabled value="{{pesoF}}"></p>
                         </div>
                         <div class="form-group">
-                            </p>Estado Civil: <input type="text" name="documentoI" class="form-control" autofocus
-                                value="{{ civil }}" disabled></p>
-
+                            <p>Talla(metros)<input type="number" class="col-sm-4 form-control" name="tallaF"
+                                    placeholder="Talla(metros)" disabled value="{{tallaF}}"></p>
                         </div>
+                        <div class="form-group">
+                            <p>Grasa Corporal(kg)<input type="number" class="col-sm-4 form-control"
+                                    name="grasaCorporalF" placeholder="Grasa Corporal(kg)" disabled
+                                    value="{{grasaCorporalF}}"></p>
+                        </div>
+
+                        <div class="form-group">
+                            <p>Masa Magra(kg)<input type="number" class="col-sm-4 form-control" name="masaMagraF"
+                                    placeholder="Masa Magra(kg)" disabled value="{{masaMagraF}}"></p>
+                        </div>
+
                     </div>
                 </div>
                 {{else}}

@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const FormMedicoSchema = new Schema({
-    documentoI: { type:String, required:true},
-    genero: { type:String, required:true },
-    fechaNacimiento : { type:Date, required:true },
-    civil : { type:String, required:true },
-    pais : { type:String, required:true },
-    tipoSangre : { type:String, required:true },
-    seguroM : { type:String, required: false },
-    enfermedadPrevia : { type:String, required:true},
-    alergias : { type:String, required:true},
+    deporteF: { type:String, required:true},
+    alimentacionF: { type:String, required:true },
+    horasSueñoF : { type:Number, required:true },
+    fechaExaF : { type:String, required:true },
+    pesoF : { type:Number, required:true },
+    tallaF : { type:Number, required:true },
+    grasaCorporalF : { type:Number, required: true },
+    masaMagraF : { type:Number, required:true},
     date : { type:Date, default: Date.now },
     user : { type: String}
 });

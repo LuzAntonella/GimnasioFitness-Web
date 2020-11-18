@@ -50,16 +50,15 @@ router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
         const contexto = {
             formM: documentos.map(documento => {
             return {
-                documentoI: documento.documentoI,
-                genero : documento.genero,
-                fechaNacimiento : documento.fechaNacimiento,
-                civil: documento.civil,
-                pais: documento.pais,
-                tipoSangre: documento.tipoSangre,
-                seguroM :documento.seguroM,
-                enfermedadPrevia :documento.enfermedadPrevia,
-                alergias: documento.alergias,
-                id: documento._id
+              deporteF:documento.deporteF,
+              alimentacionF : documento.alimentacionF,
+              horasSueñoF : documento.horasSueñoF,
+              fechaExaF : documento.fechaExaF,
+              pesoF: documento.pesoF,
+              tallaF: documento.tallaF,
+              grasaCorporalF: documento.grasaCorporalF,
+              masaMagraF: documento.masaMagraF,
+              id: documento._id
             }
           })
         }
@@ -70,7 +69,7 @@ router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
 
 //-------------------------
 router.get('/miPerfil', isAuthenticated,(req, res) => {
-  res.render('panelUsuario/perfil');
+  res.render('panelUsuario/perfilG');
 });
 router.get('/addDatosFis',isAuthenticated,(req, res) => {
   res.render('panelUsuario/addDatosF');
@@ -78,40 +77,93 @@ router.get('/addDatosFis',isAuthenticated,(req, res) => {
 
 //aqui guardo los datos en la BD(esto es de formulario medico)
 router.post('/addFicha', isAuthenticated,async (req,res) => {
-  const {documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias}= req.body;
+  const {deporteF,alimentacionF,horasSueñoF,fechaExaF,pesoF,tallaF,grasaCorporalF,masaMagraF}= req.body;
   const errors =[];
-  if(!documentoI){
-      errors.push({text:'Por favor inserte su documento de identidad'});
+  if(!deporteF){
+      errors.push({text:'Por favor inserte deporte'});
   }
-  if(!genero){
-      errors.push({text:'Por favor inserte su género'});
+  if(!alimentacionF){
+      errors.push({text:'Por favor inserte tipo de alimentacion'});
   }
-  if(!fechaNacimiento){
-      errors.push({text:'Por favor inserte su fecha de nacimiento'});
+  if(!horasSueñoF){
+      errors.push({text:'Por favor inserte cantidad de horas que duerme'});
   }
   //falta validar los demas datos
   if(errors.length > 0){
       res.render('panelUsuario/addDatosF',{
           errors,
-          documentoI,
-          genero,
-          fechaNacimiento,
-          civil,
-          pais,
-          tipoSangre,
-          seguroM,
-          enfermedadPrevia,
-          alergias
+          deporteF,
+          alimentacionF,
+          horasSueñoF,
+          fechaExaF,
+          pesoF,
+          tallaF,
+          grasaCorporalF,
+          masaMagraF
       });
   } else{
-      const newFormMedico = new FormMedico({documentoI, genero, fechaNacimiento, civil, pais, tipoSangre, seguroM, enfermedadPrevia ,alergias});
+      const newFormMedico = new FormMedico({deporteF,alimentacionF,horasSueñoF,fechaExaF,pesoF,tallaF,grasaCorporalF,masaMagraF});
       //enlazo para cada uno
       newFormMedico.user = req.user.id;
       await newFormMedico.save();
-      req.flash('success_msg','Ficha médica agregada exitosamente');
+      req.flash('success_msg','Ficha física agregada exitosamente');
       //luego de que se guarda lo direcciono a selección cita
       res.redirect('/misDatosFisicos');
 
   }
+});
+
+//-----Actualizar Ficha Medica
+router.get('/fichaM/edit/:id',isAuthenticated, async (req, res) => {
+
+  const datosF = await FormMedico.findById(req.params.id)
+  .then(data =>{
+      return {
+        deporteF:data.deporteF,
+        alimentacionF : data.alimentacionF,
+        horasSueñoF : data.horasSueñoF,
+        fechaExaF : data.fechaExaF,
+        pesoF: data.pesoF,
+        tallaF: data.tallaF,
+        grasaCorporalF: data.grasaCorporalF,
+        masaMagraF: data.masaMagraF,
+        id:data.id
+      }
+  })
+  res.render('panelUsuario/edit-datosF',{datosF})
+});
+
+router.put('/fichaM/edit-fichaM/:id', isAuthenticated,async (req, res) =>{
+  const {deporteF,alimentacionF,horasSueñoF,fechaExaF,pesoF,tallaF,grasaCorporalF,masaMagraF}= req.body;
+  const errors =[];
+  if(!deporteF){
+      errors.push({text:'Por favor inserte deporte'});
+  }
+  if(!alimentacionF){
+      errors.push({text:'Por favor inserte tipo de alimentacion'});
+  }
+  if(!horasSueñoF){
+      errors.push({text:'Por favor inserte cantidad de horas que duerme'});
+  }
+  //falta validar los demas datos
+  if(errors.length > 0){
+      res.render('panelUsuario/edit-DatosF',{
+          errors,
+          deporteF,
+          alimentacionF,
+          horasSueñoF,
+          fechaExaF,
+          pesoF,
+          tallaF,
+          grasaCorporalF,
+          masaMagraF
+      });
+    }else{
+      //actualizar
+    await FormMedico.findByIdAndUpdate(req.params.id,{deporteF,alimentacionF,horasSueñoF,fechaExaF,pesoF,tallaF,grasaCorporalF,masaMagraF});
+    req.flash('success_msg','Ficha Física Updated Successfully');
+    res.redirect(('/misDatosFisicos'));
+    }
+  
 });
 module.exports = router;

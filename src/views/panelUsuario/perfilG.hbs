@@ -1,7 +1,7 @@
 <div class="d-flex" id="sidebarUsuario">
     <div id="sidebar-container" class="bg-primary">
         <div class="logo">
-            <h4 class=" text-light text-center ">USUARIO</h4>
+            <h4 class=" text-light text-center">ADMINISTRADOR</h4>
         </div>
         <div class="menu">
             <a href="/panelUsu" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Cursos</a>
@@ -40,10 +40,45 @@
                 </div>
             </div>
         </nav>
-        <!-- MI PERFIL DATOS-->
-        <div class="container p-3">
-            <h3 class="font-weight-bold mb-0">MI PERFIL</h3>
+        <div id="content">
+            <h3 class="font-weight-bold mb-0 p-3">PERFIL</h3>
+            <div class="card mx-auto" style="width: 50rem;">
+                <div class="card-header">
+                    Información Personal
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <h5>DNI</h5>
+                        {{#each user}}
+                        {{ dni }}
+                        {{/each}}
+                        <h5>Nombre</h5>
+                        {{#each user}}
+                        {{ name }}
+                        {{/each}}
+                        <h5>Apellido</h5>
+                        {{#each user}}
+                        {{ apellido }}
+                        {{/each}}
+                        <h5>Género</h5>
+                        {{#each user}}
+                        {{ genero }}
+                        {{/each}}
+                        <h5>Teléfono</h5>
+                        {{#each user}}
+                        {{ telefono }}
+                        {{/each}}
+                        <h5>Email</h5>
+                        {{#each user}}
+                        {{ email }}
+                        {{/each}}
+                        <h5>Fecha Nacimiento</h5>
+                        {{#each user}}
+                        {{ fechaNacimiento }}
+                        {{/each}}
+                    </blockquote>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </div>
