@@ -68,9 +68,12 @@ router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
 });
 
 //-------------------------
+
+//-------
 router.get('/miPerfil', isAuthenticated,(req, res) => {
   res.render('panelUsuario/perfilG');
 });
+
 router.get('/addDatosFis',isAuthenticated,(req, res) => {
   res.render('panelUsuario/addDatosF');
 });

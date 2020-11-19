@@ -22,24 +22,7 @@ const fs = require('fs-extra');
     res.render('notes/edit-note',{user});
   });*/
 router.get('/moduloU', isAuthenticated, async (req, res) => {
-    await User.find({user: req.body._id})
-    
-      .then(documentos => {
-        const contexto = {
-            User: documentos.map(documento => {
-            return {
-                dni: documento.dni,
-                name: documento.name,
-                apellido: documento.apellido,
-                telefono: documento.telefono,
-                email: documento.email,
-                image: documento.imageURL,
-                id: documento._id,
-            }
-          })
-        }
-        res.render('panelAdmin/tableroAdmin', {User: contexto.User}); 
-      });
+   res.render('panelAdmin/tableroAdmin'); 
 });
 router.get('/usuariosAdmin', isAuthenticated, async (req, res) => {
     await User.find({user: req.body._id})
