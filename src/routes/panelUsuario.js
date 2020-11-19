@@ -27,12 +27,14 @@ router.get('/panelUsu', isAuthenticated,async (req, res) => {
       const contexto = {
           Curso: documentos.map(documento => {
           return {
-              codigoCurso: documento.codigoCurso,
-              nameCurso: documento.nameCurso,
-              docenteCurso : documento.docenteCurso,
-              costoCurso : documento.costoCurso,
-              descripcionCurso: documento.descripcionCurso,
-              id: documento._id,
+            codigoCurso: documento.codigoCurso,
+            nameCurso: documento.nameCurso,
+            docenteCurso: documento.docenteCurso,
+            costoCurso: documento.costoCurso,
+            horaInicio: documento.horaInicio,
+            horaFin: documento.horaFin,
+            descripcionCurso: documento.descripcionCurso,
+            id: documento._id,
               
           }
         })
