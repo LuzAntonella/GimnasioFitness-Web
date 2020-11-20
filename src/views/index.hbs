@@ -50,5 +50,26 @@
             <div class="about-more"><button>Leer más</button></div></a>
         </div>
     </section>
+    <!--Docentes-->
+    <!--Testimonios-->
+    <section class="testimonios">
+        <div class="testimonios-title">
+            <h2>Docentes</h2>
+            <hr>
+        </div>
 
+        <div class="box-testimonios">
+            {{#each Docente}}
+            <div class="card-testimonio">
+                <div class="card-img"><img src="{{ image }}" alt=""></div>
+                <div class="testimonio-text">
+                    <h6>{{name}} {{apellido}}</h6>
+                    <p>Profesión</p>
+                    <p>{{profesion}}</p>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+
+    </section>
 </body>
