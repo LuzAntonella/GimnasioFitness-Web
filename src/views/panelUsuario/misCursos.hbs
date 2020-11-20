@@ -65,9 +65,11 @@
                                         <th>Descripción</th>
                                         <th>Docente</th>
                                         <th>Costo</th>
+                                        <th>Estado</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                {{#each Curso }}
+                                {{#each matriculaCur }}
 
                                 <body>
                                     <tr>
@@ -76,6 +78,13 @@
                                         <td>{{ descripcionCurso }}</td>
                                         <td>{{ docenteCurso }}</td>
                                         <td>{{ costoCurso }}</td>
+                                        <td>{{ realizoPago }}</td>
+                                        <td>
+                                            <div class="col text-center"><button
+                                                    class="btn btn-danger btnEliminar btn-sm" type="submit">
+                                                    Pagar
+                                                </button></div>
+                                        </td>
                                     </tr>
                                 </body>
                                 {{/each}}

@@ -8,7 +8,13 @@ const MatriculaCursoSchema = new Schema({
     horaInicio: { type:String, required:true},
     horaFin: { type:String, required:true},
     descripcionCurso: { type:String, required:true},
-    realizoPago : { type:Boolean, default:0},
+    realizoPago: { type:String , 
+        default:'deuda',
+        enum: [
+            'deuda',
+            'cancelado'
+        ]
+    },
     date : { type:Date, default: Date.now },
     user : { type: String}
 });

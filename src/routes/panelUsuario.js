@@ -3,23 +3,12 @@ const router = express.Router();
 const FormMedico = require('../models/FormMedico')
 const User = require('../models/User');
 const Docente = require('../models/Docente');
+const MatriculaCur = require('../models/MatriculaCurso');
 const Curso = require('../models/Curso');
 const passport = require('passport');
 const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
 
-/*router.get('/users/signup/:id',isAuthenticated, async (req, res) => {
-  const user= await User.findById(req.params.id)
-  .then(data =>{
-      return {
-          name: data.name
-      }
-  })
-  res.render('panelUsuario/elegirCurso',{user});
-});
-router.get('/panelUsu', isAuthenticated,(req, res) => {
-        res.render('panelUsuario/elegirCurso');
-});*/
 
 router.get('/panelUsu', isAuthenticated,async (req, res) => {
   await Curso.find({curso: req.body._id})
@@ -43,9 +32,7 @@ router.get('/panelUsu', isAuthenticated,async (req, res) => {
     });
 });
 
-router.get('/misCursos', isAuthenticated,(req, res) => {
-  res.render('panelUsuario/misCursos');
-});
+
 router.get('/misDatosFisicos', isAuthenticated,async (req, res) => {
   await FormMedico.find({user: req.user.id})
       .then(documentos => {
@@ -118,7 +105,7 @@ router.post('/addFicha', isAuthenticated,async (req,res) => {
   }
 });
 
-//-----Actualizar Ficha Medica
+//-----Actualizar Ficha Fisica
 router.get('/fichaM/edit/:id',isAuthenticated, async (req, res) => {
 
   const datosF = await FormMedico.findById(req.params.id)
@@ -135,6 +122,7 @@ router.get('/fichaM/edit/:id',isAuthenticated, async (req, res) => {
         id:data.id
       }
   })
+  console.log(datosF);
   res.render('panelUsuario/edit-datosF',{datosF})
 });
 
@@ -171,4 +159,47 @@ router.put('/fichaM/edit-fichaM/:id', isAuthenticated,async (req, res) =>{
     }
   
 });
+
+
+//guardar el curso que elijo
+router.post('/addElegirCurso/:id', isAuthenticated,async (req,res) => {
+    console.log(req.params.id)
+    const datosF = await Curso.findById(req.params.id);
+    //console.log(datosF.nameCurso);
+    const newMatriculaCurso = new MatriculaCur({codigoCurso:datosF.codigoCurso,
+                                                nameCurso:datosF.nameCurso,
+                                                docenteCurso: datosF.docenteCurso,
+                                                costoCurso: datosF.costoCurso,
+                                                horaInicio: datosF.horaInicio,
+                                                horaFin: datosF.horaFin,
+                                                descripcionCurso: datosF.descripcionCurso});
+    newMatriculaCurso.user = req.user.id;
+    await newMatriculaCurso.save();
+    req.flash('success_msg','Se ha matriculado en el curso ',datosF.nameCurso);
+    res.redirect(('/misCursos'));
+});
+
+router.get('/misCursos', isAuthenticated,async (req, res) => {
+  await MatriculaCur.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCurso: documento.codigoCurso,
+              nameCurso: documento.nameCurso,
+              docenteCurso: documento.docenteCurso,
+              costoCurso: documento.costoCurso,
+              horaInicio: documento.horaInicio,
+              horaFin: documento.horaFin,
+              descripcionCurso: documento.descripcionCurso,
+              realizoPago: documento.realizoPago,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/misCursos', {
+        matriculaCur: contexto.formM }) 
+      })
+});
+
 module.exports = router;
