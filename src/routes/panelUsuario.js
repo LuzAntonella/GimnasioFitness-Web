@@ -209,9 +209,6 @@ router.get('/carritoCompras',isAuthenticated,(req, res) => {
 });
 
 
-//Cursos ya pagados
-
-
 //DESPUES QUE SE PAGAR -Metodo de pago
 router.post('/checkout', async (req,res) => {
   console.log(req.body);
