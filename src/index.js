@@ -35,19 +35,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
- /*app.get('/modulo', function (req, res) {
-   console.log(req.query);
-    if(req.query.username === "Ryan Joe") {
-      res.render('panelAdmin/tableroAdmin');
-    }
-    else{
-        res.render('panelUsuario/elegirCurso');
-    }
-    console.log(req.params);
-       res.send('Response send to client::'+req.params.name);
-
-  });*/
-
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());

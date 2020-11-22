@@ -202,4 +202,8 @@ router.get('/misCursos', isAuthenticated,async (req, res) => {
       })
 });
 
+//CARRITO COMPRAS
+router.get('/carritoCompras',isAuthenticated,(req, res) => {
+  res.render('compras/carrito');
+});
 module.exports = router;
