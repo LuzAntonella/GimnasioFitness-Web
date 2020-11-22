@@ -39,6 +39,11 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+//PASARELA DE PAGOS
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
+
 //Global Variables(todas las vistas tengan acceso a los msn)
 app.use((req,res,next) => {
     res.locals.success_msg = req.flash('success_msg');

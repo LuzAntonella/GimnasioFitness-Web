@@ -8,7 +8,7 @@ const Curso = require('../models/Curso');
 const passport = require('passport');
 const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
-
+const stripe = require('stripe')('sk_test_51HqNgOCjkOObvbRNDujANQ4wxThStdTye9zCZGYRwzqn1lOfCybR2IoVQaArALPHcIb28CAGJBiAHboiXYl6b4Pp00mIO4UduN');
 
 router.get('/panelUsu', isAuthenticated,async (req, res) => {
   await Curso.find({curso: req.body._id})
@@ -176,10 +176,11 @@ router.post('/addElegirCurso/:id', isAuthenticated,async (req,res) => {
     newMatriculaCurso.user = req.user.id;
     await newMatriculaCurso.save();
     req.flash('success_msg','Se ha matriculado en el curso ',datosF.nameCurso);
-    res.redirect(('/misCursos'));
+    res.redirect(('/misPagos'));
 });
 
-router.get('/misCursos', isAuthenticated,async (req, res) => {
+//Aui sale el boton de pago
+router.get('/misPagos', isAuthenticated,async (req, res) => {
   await MatriculaCur.find({user: req.user.id})
       .then(documentos => {
         const contexto = {
@@ -197,7 +198,7 @@ router.get('/misCursos', isAuthenticated,async (req, res) => {
             }
           })
         }
-        res.render('panelUsuario/misCursos', {
+        res.render('panelUsuario/misPagos', {
         matriculaCur: contexto.formM }) 
       })
 });
@@ -206,4 +207,30 @@ router.get('/misCursos', isAuthenticated,async (req, res) => {
 router.get('/carritoCompras',isAuthenticated,(req, res) => {
   res.render('compras/carrito');
 });
+
+
+//Cursos ya pagados
+
+
+//DESPUES QUE SE PAGAR -Metodo de pago
+router.post('/checkout', async (req,res) => {
+  console.log(req.body);
+  //Buscar en base de datos
+  
+  const customer = await stripe.customers.create({
+    email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  });
+  const charge = await stripe.charges.create({
+    amount: '3000',
+    currency: 'usd',
+    customer: customer.id,
+    description: 'Video Editing Software'
+  });
+  console.log(charge.id);
+
+  //Respuesta Final
+  res.render('panelUsuario/cursosRegistrados');
+});
+
 module.exports = router;
