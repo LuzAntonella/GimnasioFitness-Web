@@ -1,38 +1,39 @@
 [
     {
-      "precio": 500,
+      "precio": 55.92,
       "id": 1,
-      "title": "Café",
-      "thumbnailUrl": "https://picsum.photos/id/0/600"
+      "title": "Best Gainer",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083170/gymnasio/gym1_eujebc.jpg"
     },
     {
-      "precio": 300,
+      "precio": 10.34,
       "id": 2,
-      "title": "Pizza",
-      "thumbnailUrl": "https://picsum.photos/id/10/600"
+      "title": "Tomatodos",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083696/gymnasio/gym4_txumop.jpg"
     },
     {
-      "precio": 100,
+      "precio": 30.41,
       "id": 3,
-      "title": "Agua",
-      "thumbnailUrl": "https://picsum.photos/id/20/600"
+      "title": "XB-Movilizador de grasa",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083671/gymnasio/gym3_x5qjxx.jpg"
     },
     {
-      "precio": 50,
+      "precio": 60.23,
       "id": 4,
-      "title": "Sandía",
-      "thumbnailUrl": "https://picsum.photos/id/30/600"
+      "title": "Movilizadores de grasa",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083631/gymnasio/gym2_duox0c.jpg"
     },
+    
     {
-      "precio": 10,
+      "precio": 130.98,
       "id": 5,
-      "title": "Mango",
-      "thumbnailUrl": "https://picsum.photos/id/40/600"
+      "title": "Pro Mass XL",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083719/gymnasio/gym5_hifysi.jpg"
     },
     {
-      "precio": 150,
+      "precio": 120.49,
       "id": 6,
-      "title": "Chela",
-      "thumbnailUrl": "https://picsum.photos/id/50/600"
+      "title": "Multi-Pro",
+      "thumbnailUrl": "https://res.cloudinary.com/dksvt7bla/image/upload/v1606083735/gymnasio/gym6_xjx9qx.jpg"
     }
   ]
