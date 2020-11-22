@@ -210,6 +210,10 @@ router.get('/carritoCompras',isAuthenticated,(req, res) => {
 
 
 //DESPUES QUE SE PAGAR -Metodo de pago
+router.get('/checkout',isAuthenticated,(req, res) => {
+  res.render('panelUsuario/cursosRegistrados');
+});
+
 router.post('/checkout', async (req,res) => {
   console.log(req.body);
   //Buscar en base de datos
