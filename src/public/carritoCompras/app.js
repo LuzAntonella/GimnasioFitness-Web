@@ -68,7 +68,6 @@ const pintarCarrito = () => {
         template.querySelectorAll('td')[0].textContent = producto.title
         template.querySelectorAll('td')[1].textContent = producto.cantidad
         template.querySelector('span').textContent = producto.precio * producto.cantidad
-        
         //botones
         template.querySelector('.btn-info').dataset.id = producto.id
         template.querySelector('.btn-danger').dataset.id = producto.id
@@ -106,6 +105,9 @@ const pintarFooter = () => {
 
     template.querySelectorAll('td')[0].textContent = nCantidad
     template.querySelector('span').textContent = nPrecio
+    //Esto es lo que se debe pagar
+    template.querySelector('span1').textContent = nPrecio
+    console.log(nPrecio)
 
     const clone = template.cloneNode(true)
     fragment.appendChild(clone)

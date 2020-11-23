@@ -37,6 +37,18 @@
         </button>
     </td>
     <td class="font-weight-bold">$ <span>5000</span></td>
+    <div class="col text-center">
+        <!--Boton de pago Stripe-->
+        <h7>Pagar$ <span1>5000</span1>
+        </h7>
+        <form action="/" method="POST">
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="pk_test_51HqNgOCjkOObvbRN5aW3zFNcbqJ47CL2LXi5w8Bim33zz4Bm1MOtHCdtdDpFpA6dKMElIuZ8zamBX8lpAvXTnisX00gOUk2kam"
+                data-amount="Tienda Suplementos" data-name="Tienda Suplementos" data-description="Productos"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="auto"></script>
+
+        </form>
+    </div>
 </template>
 
 <template id="template-carrito">
