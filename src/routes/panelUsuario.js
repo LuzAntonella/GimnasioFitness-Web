@@ -5,6 +5,7 @@ const User = require('../models/User');
 const Docente = require('../models/Docente');
 const MatriculaCur = require('../models/MatriculaCurso');
 const Curso = require('../models/Curso');
+const CursoPagado = require('../models/CursoPagado');
 const passport = require('passport');
 const cloudinary = require('cloudinary');
 const { isAuthenticated } = require('../helpers/auth');
@@ -202,6 +203,13 @@ router.get('/misPagos', isAuthenticated,async (req, res) => {
         matriculaCur: contexto.formM }) 
       })
 });
+//-------------------------------------------------------------------------------
+//ELIMINAR CURSO ANTES DE PAGAR-ARREPENTIDO
+router.delete('/pago/delete/:id',isAuthenticated, async (req,res) => {
+  await MatriculaCur.findByIdAndDelete(req.params.id);
+  req.flash('success_msg','Curso Deleted Successfully');
+  res.redirect('/misPagos');
+});
 
 //CARRITO COMPRAS
 router.get('/carritoCompras',isAuthenticated,(req, res) => {
@@ -209,29 +217,101 @@ router.get('/carritoCompras',isAuthenticated,(req, res) => {
 });
 
 
-//DESPUES QUE SE PAGAR -Metodo de pago
-router.get('/checkout',isAuthenticated,(req, res) => {
-  res.render('panelUsuario/cursosRegistrados');
+//MIS CURSOS YA PAGADOS
+router.get('/checkout',isAuthenticated,async(req, res) => {
+  await CursoPagado.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCurso: documento.codigoCurso,
+              nameCurso: documento.nameCurso,
+              docenteCurso: documento.docenteCurso,
+              costoCurso: documento.costoCurso,
+              horaInicio: documento.horaInicio,
+              horaFin: documento.horaFin,
+              descripcionCurso: documento.descripcionCurso,
+              estado: documento.estado,
+              fechaPagado: documento.date,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/cursosRegistrados', {
+        misCursos: contexto.formM }) 
+      })
 });
-
-router.post('/checkout', async (req,res) => {
+//----------------Stripe-----------------
+router.post('/checkout/:id', async (req,res) => {
   console.log(req.body);
   //Buscar en base de datos
+  const datosF = await MatriculaCur.findById(req.params.id);
+  const cancelado= "cancelado";
+  //Actualizar
+  await MatriculaCur.findByIdAndUpdate(req.params.id,{
+      codigoCurso: datosF.codigoCurso,
+      nameCurso: datosF.nameCurso,
+      docenteCurso: datosF.docenteCurso,
+      costoCurso: datosF.costoCurso,
+      horaInicio: datosF.horaInicio,
+      horaFin: datosF.horaFin,
+      descripcionCurso: datosF.descripcionCurso,
+      realizoPago: cancelado,
+      date: datosF.date,
+      user: datosF.user
+    });
+  //Pagado Curso
+  const newCursoPagado = new CursoPagado({
+    codigoCurso:datosF.codigoCurso,
+    nameCurso:datosF.nameCurso,
+    docenteCurso: datosF.docenteCurso,
+    costoCurso: datosF.costoCurso,
+    horaInicio: datosF.horaInicio,
+    horaFin: datosF.horaFin,
+    descripcionCurso: datosF.descripcionCurso});
+    newCursoPagado.user = req.user.id;
+    await newCursoPagado.save();
+    req.flash('success_msg','Ha pagado el curso de ',datosF.nameCurso);
+
   
+  //Stripe - Pagos
   const customer = await stripe.customers.create({
     email: req.body.stripeEmail,
     source: req.body.stripeToken
   });
   const charge = await stripe.charges.create({
-    amount: '3000',
+    amount: datosF.costoCurso,
     currency: 'usd',
     customer: customer.id,
-    description: 'Video Editing Software'
+    description: datosF.descripcionCurso
   });
   console.log(charge.id);
 
   //Respuesta Final
-  res.render('panelUsuario/cursosRegistrados');
+  res.redirect('/cursosPagados');
 });
 
+router.get('/cursosPagados', isAuthenticated,async (req, res) => {
+  await CursoPagado.find({user: req.user.id})
+      .then(documentos => {
+        const contexto = {
+            formM: documentos.map(documento => {
+            return {
+              codigoCurso: documento.codigoCurso,
+              nameCurso: documento.nameCurso,
+              docenteCurso: documento.docenteCurso,
+              costoCurso: documento.costoCurso,
+              horaInicio: documento.horaInicio,
+              horaFin: documento.horaFin,
+              descripcionCurso: documento.descripcionCurso,
+              estado: documento.estado,
+              fechaPagado: documento.date,
+              id: documento._id
+            }
+          })
+        }
+        res.render('panelUsuario/cursosPagados', {
+        cursoPagado: contexto.formM }) 
+      })
+});
 module.exports = router;

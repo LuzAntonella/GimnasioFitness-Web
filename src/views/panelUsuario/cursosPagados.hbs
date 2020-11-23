@@ -48,7 +48,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-9">
-                            <h3 class="font-weight-bold mb-0">MIS CURSOS</h3>
+                            <h3 class="font-weight-bold mb-0">REGISTRO PAGOS</h3>
                         </div>
                     </div>
                 </div>
@@ -66,12 +66,13 @@
                                         <th>Nombre</th>
                                         <th>Descripción</th>
                                         <th>Docente</th>
-                                        <th>Hora Inicio</th>
-                                        <th>Hora Fin</th>
+                                        <th>$Costo</th>
+                                        <th>Estado</th>
+                                        <th>Fecha-Hora</th>
 
                                     </tr>
                                 </thead>
-                                {{#each misCursos }}
+                                {{#each cursoPagado }}
 
                                 <body>
                                     <tr>
@@ -79,8 +80,9 @@
                                         <td>{{ nameCurso }}</td>
                                         <td>{{ descripcionCurso }}</td>
                                         <td>{{ docenteCurso }}</td>
-                                        <td>{{ horaInicio }}</td>
-                                        <td>{{ horaFin }}</td>
+                                        <td>{{ costoCurso }}</td>
+                                        <td>{{ estado }}</td>
+                                        <td>{{ fechaPagado }}</td>
 
                                     </tr>
                                 </body>
