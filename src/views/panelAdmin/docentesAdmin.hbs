@@ -171,16 +171,15 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btnEditar btn-sm text-light"
-                                                            style="background-color: blue;" data-toggle="modal"
-                                                            data-target="#exampleModal"
-                                                            data-whatever="@mdo">Editar</button>
+                                                        <button class="btn btn-primary btn-sm"><a
+                                                                href="/docente/edit/{{id}}"><i class="fas fa-edit"
+                                                                    style="color:#FFFFFF;"></i></a></button>
                                                         <form action="/docente/delete/{{ id }}?_method=DELETE"
                                                             method="POST">
                                                             <input type="hidden" name="_method" value="DELETE">
                                                             <button class="btn btn-danger btnEliminar btn-sm"
                                                                 type="submit">
-                                                                Delete
+                                                                <i class="fas fa-user-times"></i>
                                                             </button>
                                                         </form>
                                                     </div>

@@ -214,4 +214,54 @@ router.delete('/usuario/delete/:id',isAuthenticated, async (req,res) => {
     req.flash('success_msg','Persona Deleted Successfully');
     res.redirect('/usuariosAdmin');
 });
+
+
+//------------------ACTUALIZAR
+//ACTUALIZAR DOCENTES
+router.get('/docente/edit/:id',isAuthenticated, async (req, res) => {
+
+    const datosF = await Docente.findById(req.params.id)
+    .then(data =>{
+        return {
+            dni:data.dni,
+            name:data.name,
+            apellido: data.apellido,
+            genero: data.genero,
+            telefono: data.telefono,
+            email: data.email,
+            profesion: data.profesion,
+            fechaNacimiento: data.fechaNacimiento,
+            imageURL: data.imageURL,
+            public_id: data.public_id,
+            id:data.id
+        }
+    })
+    res.render('panelAdmin/edit-docentes',{datosF})
+   // OBSERVABLES-Eliminamos el elemento en algún momento del programa
+    datosF.parentNode.removeChild(datosF);
+  });
+
+router.put('/docente/edit-docente/:id', isAuthenticated,async (req, res) =>{
+    const {dni,name,apellido,genero,telefono,email,profesion,fechaNacimiento,imageURL,public_id} = req.body;
+    const errors = [];
+    if(!name){
+        errors.push({text: 'Por favor inserte su nombre'});
+    }
+    if(!apellido){
+        errors.push({text: 'Por favor inserte su apellido'});
+    }
+    if(!telefono){
+        errors.push({text: 'Por favor inserte su teléfono'});
+    }
+    if (errors.length > 0){
+        res.render('panelAdmin/docentesAdmin', {errors,dni,name,apellido,genero,telefono,email,profesion,fechaNacimiento,imageURL,public_id});
+    }else{
+       
+      //actualizar
+     await Docente.findByIdAndUpdate(req.params.id,{dni,name,apellido,genero,telefono,email,profesion,fechaNacimiento,imageURL,public_id});
+     req.flash('success_msg','Docente Updated Successfully');
+     res.redirect(('/docentesAdmin'));
+    }
+    
+});
 module.exports = router;
