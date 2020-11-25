@@ -12,17 +12,27 @@ cloudinary.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 const fs = require('fs-extra');
-/*router.get('/users/signup/:id',isAuthenticated, async (req, res) => {
-    const user= await User.findById(req.params.id)
-    .then(data =>{
-        return {
-            name: data.name
-        }
-    })
-    res.render('notes/edit-note',{user});
-  });*/
+
 router.get('/moduloU', isAuthenticated, async (req, res) => {
-   res.render('panelAdmin/tableroAdmin'); 
+    User.count({}, function(err, count) {
+        console.log( "Total: ", count);
+    });
+   
+    await Curso.find({curso: req.body._id})
+    
+      .then(documentos => {
+        const contexto = {
+            Curso: documentos.map(documento => {
+            return {
+                nameCurso: documento.nameCurso,
+                costoCurso: documento.costoCurso,
+                id: documento._id,
+                
+            }
+          })
+        }
+        res.render('panelAdmin/tableroAdmin', {Curso: contexto.Curso}); 
+      });
 });
 router.get('/usuariosAdmin', isAuthenticated, async (req, res) => {
     await User.find({user: req.body._id})
@@ -115,10 +125,10 @@ router.post('/docentesAdmin', async (req, res) =>{
    
 });
 
-/*mostrar docente
-router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
+//mostrar docente a la hora de agregar nuevo
+router.get('/nuevoCursoAdmin',isAuthenticated,(req, res) => {
  
-      await Docente.find({Docente: req.body.docenteCurso})
+      Docente.find({Docente: req.body.docenteCurso})
     
       .then(documentos => {
         const contexto = {
@@ -131,13 +141,13 @@ router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
             }
           })
         }
-        res.render('panelAdmin/cursosAdmin', {Docente: contexto.Docente}); 
+        res.render('panelAdmin/new-curso', {Docente: contexto.Docente}); 
       });
     
-});*/
+});
 
-router.get('/cursosAdmin',isAuthenticated,async (req, res) => {
-    await Curso.find({Curso: req.body.codigoCurso})
+router.get('/cursosAdmin',isAuthenticated,(req, res) => {
+    Curso.find({Curso: req.body.codigoCurso})
     .then(documentos => {
     const contexto = {
         Curso: documentos.map(documento => {

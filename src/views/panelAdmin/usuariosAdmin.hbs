@@ -12,7 +12,7 @@
             <a href="/cursosAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-folder mr-2 lead"></i>Cursos</a>
             <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
-            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
+
         </div>
     </div>
     <div class="w-100">
@@ -42,6 +42,7 @@
             </div>
         </nav>
         <div id="content">
+            <h4 class="font-weight-bold mb-0 p-3 text-center">LISTA DE USUARIOS</h4>
             <section class="py-3">
                 <div class="container">
                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -54,6 +55,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
+
                                 <form action="/docentesAdmin" method="POST" enctype="multipart/form-data">
                                     <div class="modal-body">
 
@@ -122,10 +124,7 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btnEditar btn-sm text-light"
-                                                            style="background-color: blue;" data-toggle="modal"
-                                                            data-target="#exampleModal"
-                                                            data-whatever="@mdo">Editar</button>
+
                                                         <form action="/usuario/delete/{{ id }}?_method=DELETE"
                                                             method="POST">
                                                             <input type="hidden" name="_method" value="DELETE">

@@ -107,6 +107,7 @@ const pintarFooter = () => {
     template.querySelector('span').textContent = nPrecio
     //Esto es lo que se debe pagar
     template.querySelector('span1').textContent = nPrecio
+    template.getElementById("carritoPagar").value = nPrecio
     console.log(nPrecio)
 
     const clone = template.cloneNode(true)

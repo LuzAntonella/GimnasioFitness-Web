@@ -1,7 +1,7 @@
 <div class="d-flex" id="sidebarUsuario">
-    <div id="sidebar-container" class="bg-primary">
+    <div id="sidebar-container" class="bg-primary ">
         <div class="logo">
-            <h4 class=" text-light text-center">ADMINISTRADOR</h4>
+            <h4 class=" text-light text-center p-3">ADMINISTRADOR</h4>
         </div>
         <div class="menu">
             <a href="/moduloU" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Tablero</a>
@@ -12,7 +12,7 @@
             <a href="/cursosAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-folder mr-2 lead"></i>Cursos</a>
             <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
-            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
+
         </div>
     </div>
     <div class="w-100">
@@ -42,76 +42,16 @@
             </div>
         </nav>
         <div id="content">
+
             <section class="py-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12">
-                            <button id="btnNuevo" type="button" class="btn btn-primary" data-toggle="modal"
-                                data-target="#exampleModal" data-whatever="@mdo">Nuevo</button>
+                            <button id="btnNuevo" type="button" class="btn btn-dark"><a href="/nuevoCursoAdmin"
+                                    </a>Nuevo</button>
                         </div>
                     </div>
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Curso</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <form action="/cursosAdmin" method="POST" enctype="multipart/form-data">
-                                    <div class="modal-body">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="codigoCurso"
-                                                placeholder="Código">
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="nameCurso"
-                                                placeholder="Nombre">
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail3"
-                                                class="col-sm-5 col-form-label lead text-muted font-weight-bold">Docente</label>
-                                            <select class="col-sm-6 form-control" name="docenteCurso">
-                                                <option selected>Elije docente</option>
-                                                {{#each Docente }}
-                                                <option value="{{ name }} {{ apellido }}">{{ name }} {{ apellido }}
-                                                </option>
-                                                {{/each}}
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <input type="number" class="form-control" name="costoCurso"
-                                                placeholder="Costo">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="inputEmail3"
-                                                class="col-sm-4 col-form-label lead text-muted font-weight-bold">Hora
-                                                Inicio</label>
-                                            <input type="time" class="col-sm-5 form-control" name="horaInicio">
 
-                                            <label for="inputEmail4"
-                                                class="col-sm-4 col-form-label lead text-muted font-weight-bold">Hora
-                                                Fin</label>
-                                            <input type="time" class="col-sm-5 form-control" name="horaFin">
-                                        </div>
-                                        <div class="form-group">
-
-                                            <textarea class="form-control" name="descripcionCurso"
-                                                placeholder="Descripción"></textarea>
-                                        </div>
-
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
                 </div>
                 <div class="container p-3">
                     <div class="row">
@@ -143,10 +83,7 @@
                                             <td>
                                                 <div class="text-center">
                                                     <div class="btn-group">
-                                                        <button class="btn btnEditar btn-sm text-light"
-                                                            style="background-color: blue;" data-toggle="modal"
-                                                            data-target="#exampleModal"
-                                                            data-whatever="@mdo">Editar</button>
+
                                                         <form action="/curso/delete/{{ id }}?_method=DELETE"
                                                             method="POST">
                                                             <input type="hidden" name="_method" value="DELETE">

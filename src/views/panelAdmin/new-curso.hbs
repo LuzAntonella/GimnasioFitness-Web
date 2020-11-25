@@ -1,0 +1,108 @@
+<div class="d-flex" id="sidebarUsuario">
+    <div id="sidebar-container" class="bg-primary ">
+        <div class="logo">
+            <h4 class=" text-light text-center p-3">ADMINISTRADOR</h4>
+        </div>
+        <div class="menu">
+            <a href="/moduloU" class="d-block  text-light p-3"><i class="icon ion-md-apps mr-2 lead"></i>Tablero</a>
+            <a href="/usuariosAdmin" class="d-block  text-light p-3"><i
+                    class="icon ion-md-contacts mr-2 lead"></i>Usuarios</a>
+            <a href="/docentesAdmin" class="d-block  text-light p-3"><i
+                    class="icon ion-md-people mr-2 lead"></i>Docentes</a>
+            <a href="/cursosAdmin" class="d-block  text-light p-3"><i
+                    class="icon ion-md-folder mr-2 lead"></i>Cursos</a>
+            <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
+
+        </div>
+    </div>
+    <div class="w-100">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <form class="form-inline position-relative my-2 d-inline-block">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search">
+                    <button class="btn btn-search position-absolute" type="submit"><i
+                            class="icon ion-md-search"></i></button>
+                </form>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            {{#each user}}
+                            <img src="{{ imageURL }}" class="img-fluid rounded-circle avatar mr-2">
+                            {{ name }}
+                            {{/each}}
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+        <div id="content">
+
+            <section class="py-3">
+                <h4 class="font-weight-bold mb-0 p-3">CURSO</h4>
+                <div class="container p-3">
+                    <div class="card mx-auto" style="width: 30rem;">
+                        <div class="card-header">
+                            New Curso
+                        </div>
+                        <div class="card-body">
+                            <form action="/cursosAdmin" method="POST" enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="codigoCurso" placeholder="Código"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="nameCurso" placeholder="Nombre"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3"
+                                            class="col-sm-5 col-form-label lead text-muted font-weight-bold">Docente</label>
+                                        <select class="col-sm-6 form-control" name="docenteCurso">
+                                            <option selected>Elije docente</option>
+                                            {{#each Docente }}
+                                            <option value="{{ name }} {{ apellido }}">{{ name }} {{ apellido }}
+                                            </option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" name="costoCurso" placeholder="Costo"
+                                            required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputEmail3"
+                                            class="col-sm-4 col-form-label lead text-muted font-weight-bold">Hora
+                                            Inicio</label>
+                                        <input type="time" class="col-sm-5 form-control" name="horaInicio" required>
+
+                                        <label for="inputEmail4"
+                                            class="col-sm-4 col-form-label lead text-muted font-weight-bold">Hora
+                                            Fin</label>
+                                        <input type="time" class="col-sm-5 form-control" name="horaFin" required>
+                                    </div>
+                                    <div class="form-group">
+
+                                        <textarea class="form-control" name="descripcionCurso" placeholder="Descripción"
+                                            required></textarea>
+                                    </div>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>

@@ -12,7 +12,7 @@
             <a href="/cursosAdmin" class="d-block  text-light p-3"><i
                     class="icon ion-md-folder mr-2 lead"></i>Cursos</a>
             <a href="/perfilU" class="d-block  text-light p-3"><i class="icon ion-md-person mr-2 lead"></i>Perfil</a>
-            <a href="#" class="d-block  text-light p-3"><i class="icon ion-md-settings mr-2 lead"></i>Configuración</a>
+
         </div>
     </div>
     <div class="w-100">
@@ -50,9 +50,9 @@
                             <!--<h1 class="font-weight-bold mb-0">Bienvenida Antonella</h1> -->
                             <p class="lead text-muted">Revisa la última información</p>
                         </div>
-                        <div class="col-lg-3 d-flex">
+                        <!--<div class="col-lg-3 d-flex">
                             <button class="btn btn-primary w-100 align-self-center">Descargar reporte</button>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </section>
@@ -62,21 +62,14 @@
                     <div class="card rounded-8">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-3 d-flex stat my-3">
-                                    <div class="mx-auto">
-                                        <h6 class="text-muted">Ingresos Mensuales</h6>
-                                        <h3 class="font-weight-bold">$ 50.000</h3>
-                                        <h6 class="text-success"><i class="icon ion-md-podium mr-2 lead"></i>50.50%</h6>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 d-flex stat my-3">
+                                <div class="col-lg-4 d-flex stat my-3">
                                     <div class="mx-auto">
                                         <h6 class="text-muted">Cursos Activos</h6>
                                         <h3 class="font-weight-bold"> 50 </h3>
                                         <h6 class="text-success"><i class="icon ion-md-podium mr-2 lead"></i>50.50%</h6>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 d-flex stat my-3">
+                                <div class="col-lg-4 d-flex stat my-3">
                                     <div class="mx-auto">
                                         <h6 class="text-muted">No. de Usuarios</h6>
                                         <h3 class="font-weight-bold"> 100 </h3>
@@ -84,7 +77,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col-lg-3 d-flex my-3">
+                                <div class="col-lg-4 d-flex my-3">
                                     <div class="mx-auto">
                                         <h6 class="text-muted">No. de Docentes</h6>
                                         <h3 class="font-weight-bold">150</h3>
@@ -117,31 +110,15 @@
                                 </div>
                                 <div class="card-body">
                                     <div>
-                                        <div></div>
+
+                                        {{#each Curso }}
                                         <div>
                                             <h6 class="d-inline-block p-3"><i
-                                                    class="icon ion-md-pricetag mr-2 lead"></i>$150
+                                                    class="icon ion-md-pricetag mr-2 lead"></i>{{ costoCurso }}
                                             </h6>
-                                            <small>Curso Baile</small>
+                                            <small>{{ nameCurso }}</small>
                                         </div>
-                                        <div>
-                                            <h6 class="d-inline-block p-3"><i
-                                                    class="icon ion-md-pricetag mr-2 lead"></i>$120
-                                            </h6>
-                                            <small>Curso Aeróbicos</small>
-                                        </div>
-                                        <div>
-                                            <h6 class="d-inline-block p-3"><i
-                                                    class="icon ion-md-pricetag mr-2 lead"></i>$170
-                                            </h6>
-                                            <small>Curso Entrenamiento</small>
-                                        </div>
-                                        <div>
-                                            <h6 class="d-inline-block p-3"><i
-                                                    class="icon ion-md-pricetag mr-2 lead"></i>$110
-                                            </h6>
-                                            <small>Curso Yoga</small>
-                                        </div>
+                                        {{/each}}
                                     </div>
                                 </div>
                             </div>
