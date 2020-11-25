@@ -1,10 +1,14 @@
 {
-  "name": "web_clinicaCovid",
+  "name": "web_gimnasio",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "start": "cross-env NODE_ENV=production node backend/index.js",
+    "postinstall": "npm run build",
+    "build": "cross-env NODE_ENV= production webpack",
+    "server:dev": "webpack-dev-server"
   },
   "keywords": [],
   "author": "",
