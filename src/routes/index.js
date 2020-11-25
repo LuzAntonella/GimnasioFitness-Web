@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
 const Docente = require('../models/Docente');
 router.get('/',async (req, res) => {
     await Docente.find({Docente: req.body._id})
@@ -25,6 +26,23 @@ router.get('/',async (req, res) => {
 
 router.get('/about',(req, res) => {
     res.render('about');
+});
+
+router.post('/send-email',async(req,res) => {
+    const {name , email , phone ,message} = req.body;
+    contentHTML = `
+        <h1>User Information</h1>
+        <ul>
+            <li>Username: ${name}</li>
+            <li>User Email: ${email}</li>
+            <li>PhoneNumber: ${phone}</li>
+        </ul>
+        <p>${message}</p>
+    `;
+   console.log(contentHTML);
+   
+    req.flash('success_msg','Correo Enviado Correctamente');
+    res.redirect('/about');
 });
 
 module.exports = router;
